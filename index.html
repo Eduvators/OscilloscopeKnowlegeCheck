@@ -3,50 +3,507 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscilloscope Basic Operation - Knowledge Check</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Oscilloscope Comprehensive Knowledge Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            background: #fff;
+            margin: 40px auto;
+            padding: 30px 40px 40px 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+        }
+        h1 {
+            text-align: center;
+            color: #273c75;
+        }
+        h2 {
+            color: #273c75;
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 24px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .question p {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        button {
+            background: #273c75;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        button:hover {
+            background: #40739e;
+        }
+        #results {
+            margin-top: 28px;
+            padding: 16px;
+            background: #f1f2f6;
+            border-radius: 8px;
+        }
+        .correct {
+            color: #44bd32;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #e84118;
+            font-weight: bold;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .progress {
+            height: 100%;
+            background: #273c75;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 15px;
+            background: #eee;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background: #273c75;
+            color: white;
+        }
+        .img-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .img-attribution {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            margin-top: 5px;
+        }
+        label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        label:hover {
+            background: #e3e3e3;
+        }
+        .hint {
+            font-style: italic;
+            color: #777;
+            margin-top: 8px;
+            font-size: 14px;
+            display: none;
+        }
+        .show-hint {
+            font-size: 14px;
+            color: #40739e;
+            background: none;
+            border: none;
+            padding: 5px 0;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .quiz-description {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid #273c75;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Oscilloscope Basic Operation - Knowledge Check</h1>
+        <h1>Oscilloscope Comprehensive Knowledge Check</h1>
+        
+        <div class="quiz-description">
+            <p>This quiz will test your understanding of oscilloscope operation, controls, and analysis techniques. The questions cover basic to intermediate concepts that every electronics technician or engineer should know.</p>
+            <p>The quiz is divided into three sections: Basic Operation, Controls & Settings, and Waveform Analysis.</p>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(0)">Basics</div>
+            <div class="tab" onclick="switchTab(1)">Controls</div>
+            <div class="tab" onclick="switchTab(2)">Analysis</div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
         <form id="quizForm">
-            <div class="question">
-                <img src="oscilloscope_clean.png" alt="Oscilloscope axes diagram" style="max-width:100%;margin-bottom:10px;">
-                <div class="img-attribution">Image: Wikimedia Commons, CC BY-SA 3.0</div>
-                <p>1. What does the vertical axis on an oscilloscope display?</p>
-                <label><input type="radio" name="q1" value="Voltage"> Voltage</label><br>
-                <label><input type="radio" name="q1" value="Time"> Time</label><br>
-                <label><input type="radio" name="q1" value="Frequency"> Frequency</label>
-            </div>
-            <div class="question">
-                <p>2. Increasing volts per division setting will:</p>
-                <label><input type="radio" name="q2" value="Make the waveform grow"> Make the waveform grow</label><br>
-                <label><input type="radio" name="q2" value="Shrink the waveform"> Shrink the waveform</label><br>
-                <label><input type="radio" name="q2" value="Have no effect"> Have no effect</label>
-            </div>
-            <div class="question">
-                <p>3. What does the horizontal axis of an oscilloscope represent?</p>
-                <label><input type="radio" name="q3" value="Voltage"> Voltage</label><br>
-                <label><input type="radio" name="q3" value="Time"> Time</label><br>
-                <label><input type="radio" name="q3" value="Amplitude"> Amplitude</label>
-            </div>
-            <div class="question">
+            <div class="section active" id="section1">
+                <h2>Part 1: Basic Operation</h2>
                 
-                <p>4. The trigger system in an oscilloscope is primarily used for:</p>
-                <label><input type="radio" name="q4" value="Adjusting waveform size"> Adjusting waveform size</label><br>
-                <label><input type="radio" name="q4" value="Increasing voltage"> Increasing voltage</label><br>
-                <label><input type="radio" name="q4" value="Stabilizing the waveform"> Stabilizing the waveform</label>
+                <!-- Oscilloscope diagram reference removed -->
+                <div class="quiz-note" style="background-color: #e9f7fe; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p><strong>Note:</strong> This quiz refers to standard oscilloscope controls and display elements. Refer to your oscilloscope's manual or the diagram provided in class for specific control locations.</p>
+                </div>
+                
+                <div class="question">
+                    <p>1. What does the vertical axis on an oscilloscope display?</p>
+                    <label><input type="radio" name="q1" value="Voltage"> Voltage</label>
+                    <label><input type="radio" name="q1" value="Time"> Time</label>
+                    <label><input type="radio" name="q1" value="Frequency"> Frequency</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint1')">Show Hint</button>
+                    <div class="hint" id="hint1">Consider what's controlled by the VOLTS/DIV knobs on an oscilloscope.</div>
+                </div>
+                
+                <div class="question">
+                    <p>2. Increasing volts per division setting will:</p>
+                    <label><input type="radio" name="q2" value="Make the waveform grow"> Make the waveform grow</label>
+                    <label><input type="radio" name="q2" value="Shrink the waveform"> Shrink the waveform</label>
+                    <label><input type="radio" name="q2" value="Have no effect"> Have no effect</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint2')">Show Hint</button>
+                    <div class="hint" id="hint2">Think about what happens when you increase the scale - do you see more or less detail?</div>
+                </div>
+                
+                <div class="question">
+                    <p>3. What does the horizontal axis of an oscilloscope represent?</p>
+                    <label><input type="radio" name="q3" value="Voltage"> Voltage</label>
+                    <label><input type="radio" name="q3" value="Time"> Time</label>
+                    <label><input type="radio" name="q3" value="Amplitude"> Amplitude</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint3')">Show Hint</button>
+                    <div class="hint" id="hint3">Check the TIME/DIV control section of standard oscilloscopes.</div>
+                </div>
+                
+                <div class="question">
+                    <p>4. The trigger system in an oscilloscope is primarily used for:</p>
+                    <label><input type="radio" name="q4" value="Adjusting waveform size"> Adjusting waveform size</label>
+                    <label><input type="radio" name="q4" value="Increasing voltage"> Increasing voltage</label>
+                    <label><input type="radio" name="q4" value="Stabilizing the waveform"> Stabilizing the waveform</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint4')">Show Hint</button>
+                    <div class="hint" id="hint4">Without proper triggering, a waveform would appear to constantly move across the screen.</div>
+                </div>
+                
+                <div class="question">
+                    <p>5. What happens if the waveform is not maximized vertically?</p>
+                    <label><input type="radio" name="q5" value="The scope's ADC isn't fully utilized"> The scope's ADC isn't fully utilized</label>
+                    <label><input type="radio" name="q5" value="The waveform becomes clearer"> The waveform becomes clearer</label>
+                    <label><input type="radio" name="q5" value="Sampling rate decreases"> Sampling rate decreases</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint5')">Show Hint</button>
+                    <div class="hint" id="hint5">Consider how digital scopes convert analog signals and what affects measurement precision.</div>
+                </div>
+
+                <div class="navigation">
+                    <div></div>
+                    <button type="button" onclick="nextSection(1)">Next Section</button>
+                </div>
             </div>
-            <div class="question">
-                <p>5. What happens if the waveform is not maximized vertically?</p>
-                <label><input type="radio" name="q5" value="The scope’s ADC isn't fully utilized"> The scope’s ADC isn't fully utilized</label><br>
-                <label><input type="radio" name="q5" value="The waveform becomes clearer"> The waveform becomes clearer</label><br>
-                <label><input type="radio" name="q5" value="Sampling rate decreases"> Sampling rate decreases</label>
+            
+            <div class="section" id="section2">
+                <h2>Part 2: Controls & Settings</h2>
+                
+                <div class="question">
+                    <p>6. What does the "VOLTS/DIV" control adjust?</p>
+                    <label><input type="radio" name="q6" value="Vertical scale"> Vertical scale</label>
+                    <label><input type="radio" name="q6" value="Horizontal scale"> Horizontal scale</label>
+                    <label><input type="radio" name="q6" value="Trigger level"> Trigger level</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint6')">Show Hint</button>
+                    <div class="hint" id="hint6">Look at the location of this control on the oscilloscope - is it under the vertical or horizontal section?</div>
+                </div>
+                
+                <div class="question">
+                    <p>7. What is the purpose of the "Y-POSITION" control?</p>
+                    <label><input type="radio" name="q7" value="Move the waveform horizontally"> Move the waveform horizontally</label>
+                    <label><input type="radio" name="q7" value="Move the waveform vertically"> Move the waveform vertically</label>
+                    <label><input type="radio" name="q7" value="Change the voltage scale"> Change the voltage scale</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint7')">Show Hint</button>
+                    <div class="hint" id="hint7">The Y-axis represents the vertical dimension on the display.</div>
+                </div>
+                
+                <div class="question">
+                    <p>8. What does the "AC/DC" switch refer to?</p>
+                    <label><input type="radio" name="q8" value="The type of signal being measured"> The type of signal being measured</label>
+                    <label><input type="radio" name="q8" value="Input coupling mode"> Input coupling mode</label>
+                    <label><input type="radio" name="q8" value="The power source of the oscilloscope"> The power source of the oscilloscope</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint8')">Show Hint</button>
+                    <div class="hint" id="hint8">This setting determines how the input signal is processed before display.</div>
+                </div>
+                
+                <div class="question">
+                    <p>9. What is the function of the "HOLDOFF" control in the trigger section?</p>
+                    <label><input type="radio" name="q9" value="Adjusts how long to wait before allowing another trigger"> Adjusts how long to wait before allowing another trigger</label>
+                    <label><input type="radio" name="q9" value="Sets the trigger voltage level"> Sets the trigger voltage level</label>
+                    <label><input type="radio" name="q9" value="Controls the width of the displayed waveform"> Controls the width of the displayed waveform</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint9')">Show Hint</button>
+                    <div class="hint" id="hint9">This is useful when measuring complex signals with multiple potential trigger points.</div>
+                </div>
+                
+                <div class="question">
+                    <p>10. What does the "INTENSITY" control adjust?</p>
+                    <label><input type="radio" name="q10" value="The trigger sensitivity"> The trigger sensitivity</label>
+                    <label><input type="radio" name="q10" value="The brightness of the displayed trace"> The brightness of the displayed trace</label>
+                    <label><input type="radio" name="q10" value="The amplitude of the input signal"> The amplitude of the input signal</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint10')">Show Hint</button>
+                    <div class="hint" id="hint10">Look at the display section controls - which one would affect how the trace appears visually?</div>
+                </div>
+                
+                <div class="navigation">
+                    <button type="button" onclick="prevSection(1)">Previous Section</button>
+                    <button type="button" onclick="nextSection(2)">Next Section</button>
+                </div>
             </div>
-            <button type="button" onclick="checkAnswers()">Check Answers</button>
+            
+            <div class="section" id="section3">
+                <h2>Part 3: Waveform Analysis</h2>
+                
+                <div class="question">
+                    <p>11. To measure the frequency of a waveform, you need to:</p>
+                    <label><input type="radio" name="q11" value="Measure its amplitude and multiply by the time scale"> Measure its amplitude and multiply by the time scale</label>
+                    <label><input type="radio" name="q11" value="Measure the time period of one cycle and calculate 1/period"> Measure the time period of one cycle and calculate 1/period</label>
+                    <label><input type="radio" name="q11" value="Count the number of divisions it takes to reach maximum amplitude"> Count the number of divisions it takes to reach maximum amplitude</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint11')">Show Hint</button>
+                    <div class="hint" id="hint11">Frequency is the reciprocal of the time period.</div>
+                </div>
+                
+                <div class="question">
+                    <p>12. When using the X-Y mode on an oscilloscope:</p>
+                    <label><input type="radio" name="q12" value="The horizontal axis displays time as usual"> The horizontal axis displays time as usual</label>
+                    <label><input type="radio" name="q12" value="Channel 1 drives the X axis, Channel 2 drives the Y axis"> Channel 1 drives the X axis, Channel 2 drives the Y axis</label>
+                    <label><input type="radio" name="q12" value="Only a single channel can be displayed"> Only a single channel can be displayed</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint12')">Show Hint</button>
+                    <div class="hint" id="hint12">X-Y mode displays two signals relative to each other rather than relative to time.</div>
+                </div>
+                
+                <div class="question">
+                    <p>13. Why is it important to match the probe's impedance to the oscilloscope's input impedance?</p>
+                    <label><input type="radio" name="q13" value="To prevent damage to the oscilloscope"> To prevent damage to the oscilloscope</label>
+                    <label><input type="radio" name="q13" value="To avoid loading the circuit under test"> To avoid loading the circuit under test</label>
+                    <label><input type="radio" name="q13" value="To increase the maximum measurable voltage"> To increase the maximum measurable voltage</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint13')">Show Hint</button>
+                    <div class="hint" id="hint13">Think about how measurement equipment can affect the circuit being measured.</div>
+                </div>
+                
+                <div class="question">
+                    <p>14. What is indicated by the "400V MAX" label near the input connectors?</p>
+                    <label><input type="radio" name="q14" value="The maximum voltage the oscilloscope can display"> The maximum voltage the oscilloscope can display</label>
+                    <label><input type="radio" name="q14" value="The maximum safe input voltage"> The maximum safe input voltage</label>
+                    <label><input type="radio" name="q14" value="The maximum power consumption of the oscilloscope"> The maximum power consumption of the oscilloscope</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint14')">Show Hint</button>
+                    <div class="hint" id="hint14">This is a safety-related specification.</div>
+                </div>
+                
+                <div class="question">
+                    <p>15. What does "CAT.II" refer to on the input connectors?</p>
+                    <label><input type="radio" name="q15" value="Catalog number II"> Catalog number II</label>
+                    <label><input type="radio" name="q15" value="Category II measurement environment safety rating"> Category II measurement environment safety rating</label>
+                    <label><input type="radio" name="q15" value="Calibration type II"> Calibration type II</label>
+                    <button type="button" class="show-hint" onclick="toggleHint('hint15')">Show Hint</button>
+                    <div class="hint" id="hint15">This relates to electrical safety standards and overvoltage protection.</div>
+                </div>
+                
+                <div class="navigation">
+                    <button type="button" onclick="prevSection(2)">Previous Section</button>
+                    <button type="button" onclick="checkAnswers()">Check All Answers</button>
+                </div>
+            </div>
+            
         </form>
         <div id="results"></div>
     </div>
-    <script src="app.js"></script>
+    
+    <script>
+        const correctAnswers = {
+            q1: "Voltage",
+            q2: "Shrink the waveform",
+            q3: "Time",
+            q4: "Stabilizing the waveform",
+            q5: "The scope's ADC isn't fully utilized",
+            q6: "Vertical scale",
+            q7: "Move the waveform vertically",
+            q8: "Input coupling mode",
+            q9: "Adjusts how long to wait before allowing another trigger",
+            q10: "The brightness of the displayed trace",
+            q11: "Measure the time period of one cycle and calculate 1/period",
+            q12: "Channel 1 drives the X axis, Channel 2 drives the Y axis",
+            q13: "To avoid loading the circuit under test",
+            q14: "The maximum safe input voltage",
+            q15: "Category II measurement environment safety rating"
+        };
+        
+        let currentSection = 1;
+        const totalSections = 3;
+        
+        function nextSection(section) {
+            document.getElementById(`section${section}`).classList.remove('active');
+            document.getElementById(`section${section+1}`).classList.add('active');
+            currentSection = section + 1;
+            updateProgress();
+        }
+        
+        function prevSection(section) {
+            document.getElementById(`section${section}`).classList.remove('active');
+            document.getElementById(`section${section-1}`).classList.add('active');
+            currentSection = section - 1;
+            updateProgress();
+        }
+        
+        function switchTab(tabIndex) {
+            document.querySelectorAll('.tab').forEach((tab, index) => {
+                if (index === tabIndex) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            document.querySelectorAll('.section').forEach((section, index) => {
+                if (index === tabIndex) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+            
+            currentSection = tabIndex + 1;
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const progress = (currentSection - 1) / totalSections * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+        
+        function toggleHint(hintId) {
+            const hint = document.getElementById(hintId);
+            if (hint.style.display === 'block') {
+                hint.style.display = 'none';
+            } else {
+                hint.style.display = 'block';
+            }
+        }
+        
+        function checkAnswers() {
+            let score = 0;
+            let feedback = [];
+            
+            // Original 5 questions (for compatibility with existing code)
+            for (let i = 1; i <= 5; i++) {
+                const q = document.querySelector(`input[name='q${i}']:checked`);
+                if (!q) {
+                    feedback.push(`<p>Question ${i}: <span class='incorrect'>No answer selected.</span> Correct answer: <b>${correctAnswers[`q${i}`]}</b></p>`);
+                    continue;
+                }
+                if (q.value === correctAnswers[`q${i}`]) {
+                    score++;
+                    feedback.push(`<p>Question ${i}: <span class='correct'>Correct!</span></p>`);
+                } else {
+                    feedback.push(`<p>Question ${i}: <span class='incorrect'>Incorrect.</span> Correct answer: <b>${correctAnswers[`q${i}`]}</b></p>`);
+                }
+            }
+            
+            // Additional questions
+            for (let i = 6; i <= 15; i++) {
+                const q = document.querySelector(`input[name='q${i}']:checked`);
+                if (!q) {
+                    feedback.push(`<p>Question ${i}: <span class='incorrect'>No answer selected.</span> Correct answer: <b>${correctAnswers[`q${i}`]}</b></p>`);
+                    continue;
+                }
+                if (q.value === correctAnswers[`q${i}`]) {
+                    score++;
+                    feedback.push(`<p>Question ${i}: <span class='correct'>Correct!</span></p>`);
+                } else {
+                    feedback.push(`<p>Question ${i}: <span class='incorrect'>Incorrect.</span> Correct answer: <b>${correctAnswers[`q${i}`]}</b></p>`);
+                }
+            }
+            
+            // Provide overall score and categorized feedback
+            let scoreText = `<h2>Your Score: ${score}/15</h2>`;
+            let basicsScore = 0;
+            for (let i = 1; i <= 5; i++) {
+                const q = document.querySelector(`input[name='q${i}']:checked`);
+                if (q && q.value === correctAnswers[`q${i}`]) {
+                    basicsScore++;
+                }
+            }
+            
+            let controlsScore = 0;
+            for (let i = 6; i <= 10; i++) {
+                const q = document.querySelector(`input[name='q${i}']:checked`);
+                if (q && q.value === correctAnswers[`q${i}`]) {
+                    controlsScore++;
+                }
+            }
+            
+            let analysisScore = 0;
+            for (let i = 11; i <= 15; i++) {
+                const q = document.querySelector(`input[name='q${i}']:checked`);
+                if (q && q.value === correctAnswers[`q${i}`]) {
+                    analysisScore++;
+                }
+            }
+            
+            const categoriesText = `
+                <div style="margin-top: 15px; margin-bottom: 15px;">
+                    <p><b>Section Scores:</b></p>
+                    <p>Basic Operation: ${basicsScore}/5</p>
+                    <p>Controls & Settings: ${controlsScore}/5</p>
+                    <p>Waveform Analysis: ${analysisScore}/5</p>
+                </div>
+            `;
+            
+            let recommendation = "";
+            if (score <= 5) {
+                recommendation = "<p><b>Recommendation:</b> You should review the basic principles of oscilloscope operation before proceeding to practical applications.</p>";
+            } else if (score <= 10) {
+                recommendation = "<p><b>Recommendation:</b> You have a good understanding of oscilloscopes but could benefit from more practice with advanced features.</p>";
+            } else {
+                recommendation = "<p><b>Recommendation:</b> Excellent understanding of oscilloscopes! You're ready for advanced troubleshooting and signal analysis tasks.</p>";
+            }
+            
+            document.getElementById('results').innerHTML = scoreText + categoriesText + recommendation + feedback.join('');
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Initialize
+        updateProgress();
+    </script>
 </body>
 </html>
