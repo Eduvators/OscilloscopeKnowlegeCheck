@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscilloscope Basic Operation - Knowledge Check</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Oscilloscope Basic Operation - Knowledge Check</h1>
+        <form id="quizForm">
+            <div class="question">
+                <img src="oscilloscope_clean.png" alt="Oscilloscope axes diagram" style="max-width:100%;margin-bottom:10px;">
+                <div class="img-attribution">Image: Wikimedia Commons, CC BY-SA 3.0</div>
+                <p>1. What does the vertical axis on an oscilloscope display?</p>
+                <label><input type="radio" name="q1" value="Voltage"> Voltage</label><br>
+                <label><input type="radio" name="q1" value="Time"> Time</label><br>
+                <label><input type="radio" name="q1" value="Frequency"> Frequency</label>
+            </div>
+            <div class="question">
+                <p>2. Increasing volts per division setting will:</p>
+                <label><input type="radio" name="q2" value="Make the waveform grow"> Make the waveform grow</label><br>
+                <label><input type="radio" name="q2" value="Shrink the waveform"> Shrink the waveform</label><br>
+                <label><input type="radio" name="q2" value="Have no effect"> Have no effect</label>
+            </div>
+            <div class="question">
+                <p>3. What does the horizontal axis of an oscilloscope represent?</p>
+                <label><input type="radio" name="q3" value="Voltage"> Voltage</label><br>
+                <label><input type="radio" name="q3" value="Time"> Time</label><br>
+                <label><input type="radio" name="q3" value="Amplitude"> Amplitude</label>
+            </div>
+            <div class="question">
+                
+                <p>4. The trigger system in an oscilloscope is primarily used for:</p>
+                <label><input type="radio" name="q4" value="Adjusting waveform size"> Adjusting waveform size</label><br>
+                <label><input type="radio" name="q4" value="Increasing voltage"> Increasing voltage</label><br>
+                <label><input type="radio" name="q4" value="Stabilizing the waveform"> Stabilizing the waveform</label>
+            </div>
+            <div class="question">
+                <p>5. What happens if the waveform is not maximized vertically?</p>
+                <label><input type="radio" name="q5" value="The scope’s ADC isn't fully utilized"> The scope’s ADC isn't fully utilized</label><br>
+                <label><input type="radio" name="q5" value="The waveform becomes clearer"> The waveform becomes clearer</label><br>
+                <label><input type="radio" name="q5" value="Sampling rate decreases"> Sampling rate decreases</label>
+            </div>
+            <button type="button" onclick="checkAnswers()">Check Answers</button>
+        </form>
+        <div id="results"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
