@@ -1,3 +1,5 @@
+![Oscilloscope diagram](oscilloscope_clean.png)
+
 # Oscilloscope Basic Operation - Knowledge Check
 
 This project is an interactive web-based quiz designed to help learners check and reinforce their understanding of basic oscilloscope operation.
